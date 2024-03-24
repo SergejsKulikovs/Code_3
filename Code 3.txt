@@ -1,0 +1,30 @@
+#include "mbed.h"
+
+DigitalOut led1(LED1);
+DigitalOut led2(LED2);
+
+void toggleLED1() {
+    while (true) {
+        led1 = !led1;
+        ThisThread::sleep_for(2s);
+    }
+}
+
+void toggleLED2() {
+    while (true) {
+        led2 = !led2;
+        ThisThread::sleep_for(5s);
+    }
+}
+
+int main() {
+    Thread thread1;
+    Thread thread2;
+    
+    thread1.start(toggleLED1);
+    thread2.start(toggleLED2);
+
+    while (true) {
+        ThisThread::sleep_for(250ms);
+    }
+}
